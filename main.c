@@ -43,7 +43,7 @@ int main(int argc, char ** argv)
 	for(i=0;i<n;i++)
 		for(j=i;j<n;j++)
 			A[j][i]=A[i][j];
-	matPrint("A",A,n);
+	//matPrint("A",A,n);
 	v[0]=1;
 	for(i=1;i<n;i++)
 		v[i]=0.0;
@@ -109,9 +109,16 @@ int main(int argc, char ** argv)
 	}
 	//matPrint("C",C,m);
 	lap=matToVect(C,m);
-	vectPrint("b",b,m);
+	//vectPrint("b",b,m);
 	lapack_int ipiv[m];
 	lapack_int info = LAPACKE_dgesv( LAPACK_COL_MAJOR, m, m, lap, m, ipiv, b, m );	
-	vectPrint("b",b,m);
+	//vectPrint("b",b,m);
+	
+	delta = (b[1]*b[1])-4*(b[0]);
+	lambda1 = (-b[1]-sqrt(delta))/2;
+	lambda2 = (-b[1]+sqrt(delta))/2;
+
+	//printf("delta: %lf, lambda1: %lf, lambda2: %lf\n",delta, lambda1, lambda2);
+
 	return 0;
 }
